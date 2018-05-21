@@ -4,6 +4,7 @@ pipeline {
     stage('Print Message') {
       steps {
         echo 'hello Sudharsan'
+        git 'https://github.com/git/git.git'
       }
     }
     stage('Check Version') {
