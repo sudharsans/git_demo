@@ -1,21 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('Print Message') {
+    stage('Download Source') {
       steps {
-        echo 'hello Sudharsan'
-        git 'https://github.com/git/git.git'
+        git 'https://github.com/apache/maven.git'
       }
     }
-    stage('Check Version') {
+    stage('Build Maven') {
       steps {
-        sh '''packer --version
-echo "Checking version"'''
-      }
-    }
-    stage('Done') {
-      steps {
-        sh 'echo "Done"'
+        sh 'mvn clean package'
       }
     }
   }
