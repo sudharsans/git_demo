@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'maven:3-alpine'
+    }
+
+  }
   stages {
     stage('Download Source') {
       steps {
@@ -9,13 +14,6 @@ pipeline {
     stage('Build Maven') {
       steps {
         sh '/usr/local/bin/mvn clean package'
-      }
-    }
-    stage('Code coverage') {
-      steps {
-        sh '''/usr/local/bin/mvn sonar:sonar \\
-  -Dsonar.host.url=http://localhost:9000 \\
-  -Dsonar.login=b502eade536e15bbf0ca2db7abc7ee4ca3573fda'''
       }
     }
   }
